@@ -13,6 +13,7 @@ export class Tab1Page {
   password: string = '';
   email: string = '';
   tipoerrorlogin:any='';
+
   constructor(
     public auth: AuthenticationService,
     public router: Router,
@@ -21,15 +22,13 @@ export class Tab1Page {
 
   async loginUser() {
     this.auth.logIn(this.email, this.password).then((userCredential) => {
-      this.router.navigate(['/tabs/tab10'])
+      this.router.navigate(['/tabs/tab11'])
     
     }).catch((error: any) => {
       console.log(error.code);
       this.tipoerrorlogin = error.code;
     this.ErrorToastlogin(this.tipoerrorlogin);
     });
-
-
 
   }
   async loginGoogle() {
@@ -43,33 +42,27 @@ export class Tab1Page {
   register() {
     this.router.navigate(['crearcuenta'])
   }
-  goToRecover() {
-    this.router.navigate(['recuperarclave'])
-  }
-
 
   async ErrorToastlogin(tipoerror:any) {
     let message = 'Contraseña o correo electrónico inválidos';
-
-    
 
     const toast = await this.toastController.create({
       header: 'Registro fallido',
       message: message,
       duration: 4500,
-      position: 'top', // Posición del toast
+      position: 'top',
       buttons: [
         {
           icon: 'close',
-          role: 'cancel', // Botón de cerrar el toast
+          role: 'cancel', 
         }
       ]
     });
-    toast.present(); // Muestra el toast
+    toast.present();
   }
 
   VolverAtras() {
-    this.router.navigate(['/user']);
+    this.router.navigate(['/home']);
   }
 
 
