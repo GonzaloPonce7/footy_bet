@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +11,19 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(
+    public auth: AuthenticationService,
+    public router: Router,
+    private navCtrl: NavController
+  ) { }
 
+
+  logout() {
+    this.auth.logOut()
+    this.router.navigate(['login'])
+  }
+
+  navigateBack() {
+    this.navCtrl.back();
+  }
 }
