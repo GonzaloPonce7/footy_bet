@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab11',
   templateUrl: 'tab11.page.html',
-  styleUrls: ['ta11.page.scss']
+  styleUrls: ['tab11.page.scss']
 })
 export class Tab11Page implements OnInit {
 
@@ -21,6 +21,10 @@ export class Tab11Page implements OnInit {
   ngOnInit() {
     //this.obtenerDocumentosFirestore();
     return
+  }
+
+  VolverAtras() {
+    this.router.navigate(['/login']);
   }
 
 }

@@ -4,15 +4,14 @@
 
 export const environment = {
   production: false,
-
+  
   firebaseConfig: {
-    apiKey: "AIzaSyAIeokwp0IGLSh2c5KXZwMEnmca3Q3-V0U",
-    authDomain: "parky-d6de6.firebaseapp.com",
-    projectId: "parky-d6de6",
-    storageBucket: "parky-d6de6.appspot.com",
-    messagingSenderId: "776592776393",
-    appId: "1:776592776393:web:154b2178447f1614634118",
-    measurementId: "G-FQ3M3GL61M",
+    apiKey: "AIzaSyB-FYt11Rmxj8XPkxSDRoj3Q1OWuYCd3sg",
+    authDomain: "footybet-4b2cb.firebaseapp.com",
+    projectId: "footybet-4b2cb",
+    storageBucket: "footybet-4b2cb.appspot.com",
+    messagingSenderId: "54818715739",
+    appId: "1:54818715739:web:645e84ee7c97e5f041a77e"
   }
 };
 

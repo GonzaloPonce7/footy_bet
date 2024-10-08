@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -33,7 +34,7 @@ export class Tab1Page {
   }
   async loginGoogle() {
     this.auth.logInGoogle().then((userCredential) => {
-      this.router.navigate(['/tabs/tab10'])
+      this.router.navigate(['/tabs/tab11'])
     }).catch((error) => {
       console.log(error.code);
       alert('Google Error.');
