@@ -25,7 +25,7 @@ export class Tab2Page {
         this.presentToast();
 
         setTimeout(() => {
-          this.router.navigate(['registroPropietario']);
+          this.router.navigate(['login']);
         }, 3000);
       })
 
@@ -45,15 +45,15 @@ export class Tab2Page {
       header: 'Registro exitoso',
       message: 'Bienvenido.',
       duration: 4500,
-      position: 'top', // Posición del toast
+      position: 'top', 
       buttons: [
         {
           icon: 'close',
-          role: 'cancel', // Botón de cerrar el toast
+          role: 'cancel', 
         },
       ],
     });
-    toast.present(); // Muestra el toast
+    toast.present(); 
   }
 
   async ErrorToast(tipoerror: any) {
@@ -73,14 +73,14 @@ export class Tab2Page {
       header: 'Registro fallido',
       message: message,
       duration: 4500,
-      position: 'top', // Posición del toast
+      position: 'top', 
       buttons: [
         {
           icon: 'close',
-          role: 'cancel', // Botón de cerrar el toast
+          role: 'cancel', 
         },
       ],
     });
-    toast.present(); // Muestra el toast
+    toast.present(); 
   }
 }
