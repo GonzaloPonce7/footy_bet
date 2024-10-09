@@ -62,6 +62,4 @@ export class DatabaseService {
       toast.present(); // Muestra el toast
     }
 
-
-
 }
