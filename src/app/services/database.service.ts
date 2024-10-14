@@ -51,15 +51,15 @@ export class DatabaseService {
         header: 'Datos guardados. ',
         message: 'Operación existosa',
         duration: 4500,
-        position: 'top', // Posición del toast
+        position: 'top', 
         buttons: [
           {
             icon: 'close',
-            role: 'cancel', // Botón de cerrar el toast
+            role: 'cancel',
           }
         ]
       });
-      toast.present(); // Muestra el toast
+      toast.present();
     }
 
 }

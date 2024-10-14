@@ -1,4 +1,48 @@
 ion-content {
     --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
   }
+
+  .match-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+  }
+  
+  .teams-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .team-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .vs-text {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .match-info {
+    margin-top: 10px;
+  }
+  
+  .match-result {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #3a3a3a;
+    font-size: 18px;
+  }
   

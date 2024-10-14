@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { Router } from '@angular/router';
+import { HomeService } from '../services/home.service';
+import { NavController } from '@ionic/angular';
 
 
 
@@ -12,38 +14,37 @@ import { Router } from '@angular/router';
 export class Tab11Page implements OnInit {
 
   partidosDelDia: any[] = [];
-  filteredDocumentos: any[] = [];
+  partidosPremier: any[] = [];
 
+  constructor(public router: Router, private homeService: HomeService, private navCtrl: NavController) {}
 
-  constructor(public router: Router) {}
-
-
-// private geocodeDirecciones(): void {
-  //   this.documentos.forEach((documento) => {
-  //     const direccion = documento.direccion;
-  //     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`;
-
-  //     fetch(url)
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         if (data.length > 0) {
-  //           const latlng = new L.LatLng(data[0].lat, data[0].lon);
-  //           if (this.esCABA(latlng)) {
-  //             this.addMarker(latlng);
-  //           } else {
-  //             console.log('La dirección está fuera de CABA:', direccion);
-  //           }
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.error('Error al geocodificar la dirección:', error);
-  //       });
-  //   });
-  // }
-
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+      this.partidosDelDia = await this.homeService.getPartidos();
+      console.log(this.partidosDelDia);
+      
+      this.partidosPremier = this.partidosDelDia.filter( 
+        p => p.league_id === "76450");
+    } catch (error) {
+      console.error('Error al cargar los partidos:', error);
+    }
     //this.obtenerDocumentosFirestore();
-    return
+
+  }
+
+  esPartidoJugado(fechaPartido: string, horaPartido: string): boolean {
+    const fechaHoraPartido = new Date(`${fechaPartido}T${horaPartido}`);
+    const fechaHoraActual = new Date();
+    
+    // Si la fecha y hora del partido es menor que la fecha actual, entonces ya se jugó
+    return fechaHoraPartido <= fechaHoraActual;
+  }
+
+  apostar(partido: any) {
+    // Navega a la página de apuestas pasando los datos del partido
+    this.navCtrl.navigateForward('/apuesta', {
+      queryParams: { partido: JSON.stringify(partido) }
+    });
   }
 
   VolverAtras() {
