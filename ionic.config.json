@@ -5,6 +5,15 @@
   },
   "type": "angular",
   "server": {
-    "port": 8080
+    "proxy": {
+      "/api": {
+        "target": "https://apiclient.besoccerapps.com",
+        "changeOrigin": true,
+        "secure": false,
+        "pathRewrite": {
+          "^/api": "/scripts/api"
+        }
+      }
+    }
   }
 }

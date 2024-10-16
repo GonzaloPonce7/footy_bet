@@ -24,7 +24,7 @@ export class Tab1Page {
 
   async loginUser() {
     this.auth.logIn(this.email, this.password).then((userCredential) => {
-      this.router.navigate(['/tabs/tab11'])
+      this.router.navigate(['/home'])
     
     }).catch((error: any) => {
       console.log(error.code);

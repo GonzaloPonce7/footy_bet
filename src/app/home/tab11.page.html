@@ -1,7 +1,7 @@
 <ion-content>
 
   
-  <!-- FLECHA ATRAS -->
+
   <ion-header [translucent]="true">
     <ion-toolbar>
       <div class="contenedor">
@@ -23,19 +23,18 @@
 
         <div class="teams-container">
           <div class="team">
-            <img [src]="partidosPremier.local_shield" alt="Escudo Local" class="team-logo">
+            <img [src]="partido.local_shield" alt="Escudo Local" class="team-logo">
             <span>{{ partido.local }}</span>
           </div>
           <span class="vs-text">VS</span>
           <div class="team">
-            <img [src]="partidosPremier.visitor" alt="Escudo Visitante" class="team-logo">
+            <img [src]="partido.visitor" alt="Escudo Visitante" class="team-logo">
             <span>{{ partido.visitor }}</span>
           </div>
         </div>
 
         <div class="match-info">
           <p>Fecha: {{ partido.date }}</p>
-          <p>Hora: {{ partido.hour }}:{{ partido.minute }}</p>
         </div>
 
         <div class="match-result">
