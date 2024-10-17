@@ -7,7 +7,8 @@ import { lastValueFrom } from 'rxjs';
 })
 export class HomeService {
   API_KEY="4d72107548021849835a6010529e5c7c"; 
-  BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php";
+  //BASE_URL = "http://localhost:8100/api/api.php";
+  //BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php";
   //URL = `https://apiclient.besoccerapps.com/scripts/api/api.php?key=${this.API_KEY}&format=json&req=matchsday&date=${this.DATE}`;
   partidos: any;
 
@@ -22,7 +23,9 @@ export class HomeService {
       date: fecha
     };
 
-    const URL = `${this.BASE_URL}?key=${params.key}&format=${params.format}&req=${params.req}&date=${params.date}`;
+    const URL = `/api`;
+
+    //const URL = `${this.BASE_URL}?key=${params.key}&format=${params.format}&req=${params.req}&date=${params.date}`;
 
     try {
       this.partidos = await lastValueFrom(this.httpClient.get(URL));

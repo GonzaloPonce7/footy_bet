@@ -9,7 +9,7 @@
       "/api": {
         "target": "https://apiclient.besoccerapps.com",
         "changeOrigin": true,
-        "secure": false,
+        "secure": true,
         "pathRewrite": {
           "^/api": "/scripts/api"
         }
