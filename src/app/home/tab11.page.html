@@ -5,7 +5,6 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <div class="contenedor">
-        <img src="assets/icon/Footybet.png" alt="Logo" class="footyLogo" />
         <p class="fuente">Bienvenido/a</p>
       </div>
       <ion-buttons class="back" slot="start" size="large">
@@ -15,7 +14,7 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-list *ngIf="partidosPremier.length > 0; else noData">
     <ion-item *ngFor="let partido of partidosPremier">
       <div class="match-card">

@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "server": "tsc && node ./nodejsProxy/server.ts"
+    "server": "node ./nodejsProxy/server.js"
   },
   "private": true,
   "dependencies": {
