@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard'; // Asegúrate de que la ruta sea correcta
 
 const routes: Routes = [
   {
@@ -9,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -22,6 +24,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/tab11.module').then((m) => m.Tab11PageModule),
+    canActivate: [AuthGuard]  // Añade el AuthGuard aquí
   },
 ];
 @NgModule({
