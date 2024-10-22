@@ -1,7 +1,4 @@
 <ion-content>
-
-  
-
   <ion-header [translucent]="true">
     <ion-toolbar>
       <div class="contenedor">
@@ -15,46 +12,40 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngIf="partidosPremier.length > 0; else noData">
-    <ion-item *ngFor="let partido of partidosPremier">
-      <div class="match-card">
-        <h3>{{ partido.competition_name }}</h3>
+  <div class="match-list"> <!-- Contenedor adicional para centrar -->
+    <ion-list *ngIf="partidosPremier.length > 0; else noData">
+      <ion-item *ngFor="let partido of partidosPremier" lines="none"> <!-- Eliminado el borde de las líneas -->
+        <div class="match-card">
+          <h3>{{ partido.competition_name }}</h3>
 
-        <div class="teams-container">
-          <div class="team">
-            <img [src]="partido.local_shield" alt="Escudo Local" class="team-logo">
-            <span>{{ partido.local }}</span>
+          <div class="teams-container">
+            <div class="team">
+              <img [src]="partido.local_shield" alt="Escudo Local" class="team-logo">
+              <span>{{ partido.local }}</span>
+            </div>
+            <span class="vs-text">VS</span>
+            <div class="team">
+              <img [src]="partido.visitor_shield" alt="Escudo Visitante" class="team-logo">
+              <span>{{ partido.visitor }}</span>
+            </div>
           </div>
-          <span class="vs-text">VS</span>
-          <div class="team">
-            <img [src]="partido.visitor" alt="Escudo Visitante" class="team-logo">
-            <span>{{ partido.visitor }}</span>
+
+          <div class="match-info">
+            <p>Fecha: {{ partido.date }}</p>
+          </div>
+
+          <div class="match-result">
+            <p *ngIf="esPartidoJugado(partido.date)">Resultado: {{ partido.result }}</p>
+            <ion-button *ngIf="!esPartidoJugado(partido.date)" (click)="apostar(partido)">Apostar</ion-button>
           </div>
         </div>
+      </ion-item>
+    </ion-list>
 
-        <div class="match-info">
-          <p>Fecha: {{ partido.date }}</p>
-        </div>
-
-        <div class="match-result">
-          <!-- Si el partido ya se jugó, mostrar solo el resultado -->
-          <p *ngIf="esPartidoJugado(partido.date)">Resultado: {{ partido.result }}</p>
-
-          <!-- Si el partido aún no se ha jugado, mostrar botón de apuesta -->
-          <ion-button *ngIf="!esPartidoJugado(partido.date)" (click)="apostar(partido)">Apostar</ion-button>
-        </div>
-
-      </div>
-    </ion-item>
-  </ion-list>
-
-  <ng-template #noData>
-    <ion-text>
-      <h4>No hay partidos disponibles.</h4>
-    </ion-text>
-  </ng-template>
-  
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ng-template #noData>
+      <ion-text>
+        <h4>No hay partidos disponibles.</h4>
+      </ion-text>
+    </ng-template>
+  </div>
 </ion-content>
-  
-  
