@@ -5,6 +5,15 @@
   },
   "type": "angular",
   "server": {
-    "port": 8080
+    "proxy": {
+      "/api": {
+        "target": "https://api.football-data.org",
+        "changeOrigin": true,
+        "secure": false,
+        "pathRewrite": {
+          "^/api": ""
+        }
+      }
+    }
   }
 }

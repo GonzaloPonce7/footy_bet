@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

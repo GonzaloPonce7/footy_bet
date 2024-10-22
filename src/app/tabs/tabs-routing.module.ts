@@ -11,13 +11,17 @@ const routes: Routes = [
         path: 'tab11',
         loadChildren: () => import('../home/tab11.module').then(m => m.Tab11PageModule)
       },
-      // {
-      //   path: 'tab2',
-      //   loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      // },
+      {
+        path: 'tab2',
+        loadChildren: () => import('../register/tab2.module').then(m => m.Tab2PageModule)
+      },
+      {
+        path: 'tab8',
+        loadChildren: () => import('../user_apuesta/tab8.module').then(m => m.Tab8PageModule)
+      },
       {
         path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('../apuestas/tab3.module').then(m => m.Tab3PageModule)
       },
       {
         path: '',

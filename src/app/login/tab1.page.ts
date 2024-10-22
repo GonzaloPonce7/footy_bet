@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
   showPassword = false;
 
@@ -23,7 +24,7 @@ export class Tab1Page {
 
   async loginUser() {
     this.auth.logIn(this.email, this.password).then((userCredential) => {
-      this.router.navigate(['/tabs/tab11'])
+      this.router.navigate(['/home'])
     
     }).catch((error: any) => {
       console.log(error.code);
