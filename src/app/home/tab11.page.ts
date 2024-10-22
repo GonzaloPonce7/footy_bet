@@ -12,7 +12,7 @@ import { Partido } from '../models/partidos.models';
 })
 export class Tab11Page implements OnInit {
   partidosPremier: Partido[] = [];
-  fecha: string = '2024-10-06';
+  //fecha: string = '2024-10-06';
 
   constructor(
     public router: Router,
@@ -23,29 +23,27 @@ export class Tab11Page implements OnInit {
   ngOnInit() {
     console.log('Inicia el home');
 
-    this.partidosPorFecha(this.fecha);
+    this.partidosPorFecha();
     //this.obtenerDocumentosFirestore();
   }
 
-  async partidosPorFecha(fecha: string) {
+  async partidosPorFecha() {
     try {
-      const partidosDelDia: any = await this.homeService.getPartidos(fecha);
+      const partidosDelDia: any = await this.homeService.getPartidos();
       console.log('Partidos del día:', partidosDelDia);
 
-      this.partidosPremier = partidosDelDia.matches
-        .filter((p: { league_id: string }) => p.league_id == '76450')
-        .map((p: any) => {
-          return {
-            id: p.id,
-            local: p.local,
-            visitor: p.visitor,
-            competition_name: p.competition_name,
-            date: `${p.date} ${p.hour}:${p.minute}`,
-            local_shield: p.local_shield,
-            visitor_shield: p.visitor_shield,
-            result: p.result,
-          } as Partido;
-        });
+      this.partidosPremier = partidosDelDia.matches.slice(0, 4).map((p: any) => {
+        return {
+          id: p.id,
+          local: p.homeTeam.name, // Nombre del equipo local
+          visitor: p.awayTeam.name, // Nombre del equipo visitante
+          competition_name: p.competition.name, // Nombre de la competición
+          date: p.utcDate, // Fecha del partido en UTC
+          local_shield: p.homeTeam.crest, // Escudo del equipo local
+          visitor_shield: p.awayTeam.crest, // Escudo del equipo visitante
+          result: p.status // Estado del partido
+        } as Partido;
+      });
 
       console.log('Partidos Premier filtrados:', this.partidosPremier);
     } catch (error) {
@@ -53,8 +51,8 @@ export class Tab11Page implements OnInit {
     }
   }
 
-  esPartidoJugado(fechaPartido: string, horaPartido: string): boolean {
-    const fechaHoraPartido = new Date(`${fechaPartido}T${horaPartido}`);
+  esPartidoJugado(fechaPartido: string): boolean {
+    const fechaHoraPartido = new Date(`${fechaPartido}`);
     const fechaHoraActual = new Date();
 
     // Si la fecha y hora del partido es menor que la fecha actual, entonces ya se jugó

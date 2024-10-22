@@ -39,10 +39,10 @@
 
         <div class="match-result">
           <!-- Si el partido ya se jugó, mostrar solo el resultado -->
-          <p *ngIf="esPartidoJugado(partido.date, partido.hour)">Resultado: {{ partido.result }}</p>
+          <p *ngIf="esPartidoJugado(partido.date)">Resultado: {{ partido.result }}</p>
 
           <!-- Si el partido aún no se ha jugado, mostrar botón de apuesta -->
-          <ion-button *ngIf="!esPartidoJugado(partido.date, partido.hour)" (click)="apostar(partido)">Apostar</ion-button>
+          <ion-button *ngIf="!esPartidoJugado(partido.date)" (click)="apostar(partido)">Apostar</ion-button>
         </div>
 
       </div>
