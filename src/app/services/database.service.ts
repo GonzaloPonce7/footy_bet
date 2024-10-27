@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc, query, where, getDocs } from 'firebase/firestore';
 import { FormGroup } from '@angular/forms';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
@@ -44,6 +44,15 @@ export class DatabaseService {
           console.error('Error :', error);
         }
       }
+    }
+
+    async getUserBets(uid: string) {
+      const betsCollectionRef = collection(db, 'Apuestas'); // Asegúrate de que esta colección exista
+      const betsQuery = query(betsCollectionRef, where('userId', '==', uid)); // Aquí se usa query y where
+      const betDocs = await getDocs(betsQuery);
+      
+      // Retorna los datos de las apuestas
+      return betDocs.docs.map(doc => doc.data());
     }
 
     async presentToast() {

@@ -23,6 +23,7 @@ export class Tab8Page implements OnInit {
       apellido: new FormControl(''),
       correo: new FormControl(''),
       telefono: new FormControl(''),
+      saldo: new FormControl(''),
     });
   }
 
@@ -47,7 +48,7 @@ export class Tab8Page implements OnInit {
   }
 
   onSubmit() {
-    this.database.onSubmit(this.formLogin, this.uid, 'Propietarios');
+    this.database.onSubmit(this.formLogin, this.uid, 'Usuarios');
   }
 
 }
