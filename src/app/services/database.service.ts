@@ -47,11 +47,10 @@ export class DatabaseService {
     }
 
     async getUserBets(uid: string) {
-      const betsCollectionRef = collection(db, 'Apuestas'); // Asegúrate de que esta colección exista
-      const betsQuery = query(betsCollectionRef, where('userId', '==', uid)); // Aquí se usa query y where
+      const betsCollectionRef = collection(db, 'Apuestas'); 
+      const betsQuery = query(betsCollectionRef, where('userId', '==', uid));
       const betDocs = await getDocs(betsQuery);
       
-      // Retorna los datos de las apuestas
       return betDocs.docs.map(doc => doc.data());
     }
 
