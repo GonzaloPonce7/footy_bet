@@ -1,4 +1,70 @@
 ion-content {
-    --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
-  }
-  
+  --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  padding: 0; 
+  margin: 0; 
+  height: 100%; 
+  width: 100%; 
+}
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%; 
+  padding: 0; 
+}
+
+.md list-md.hydrated{
+  background-color: transparent;
+}
+
+.match-card {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #3fb630;
+  width: 100%; /* Ocupar todo el ancho disponible */
+  max-width: 400px; /* Limitar el ancho máximo */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.teams-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.vs-text {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.match-info {
+  margin-top: 10px;
+}
+
+.match-result {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #3a3a3a;
+  font-size: 18px;
+}

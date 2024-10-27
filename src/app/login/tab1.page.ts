@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth'; 
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { map, take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +12,7 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   showPassword = false;
 
   password: string = '';
@@ -19,8 +22,31 @@ export class Tab1Page {
   constructor(
     public auth: AuthenticationService,
     public router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private angularFireAuth: AngularFireAuth
   ) { }
+
+  ngOnInit() {
+    console.log("inicia el login");
+    
+    this.angularFireAuth.authState.pipe(
+      take(1),
+      map(user => {
+        console.log("Aca viene el user " + user);
+        if (user) {
+          console.log("hay usuario");
+          
+          this.router.navigate(['/home']);
+          return true;
+        } else {
+          console.log("no hay usuario");
+          this.router.navigate(['login']);
+
+          return false;
+        }
+      })
+    );
+  }
 
   async loginUser() {
     this.auth.logIn(this.email, this.password).then((userCredential) => {
@@ -35,7 +61,7 @@ export class Tab1Page {
   }
   async loginGoogle() {
     this.auth.logInGoogle().then((userCredential) => {
-      this.router.navigate(['/tabs/tab11'])
+      this.router.navigate(['/home'])
     }).catch((error) => {
       console.log(error.code);
       alert('Google Error.');

@@ -10,12 +10,13 @@ export class HomeService {
 
   constructor(private httpClient: HttpClient) { }
 
+  
+
   async getPartidos() {
     const headers = new HttpHeaders({
       'X-Auth-Token': 'feab5e72ee94431db81526ae1dd56d58'
     });
 
-    // Usa la URL del proxy
     const URL = `http://localhost:3000/proxy?url=https://api.football-data.org/v4/competitions/PL/matches`;
 
     try {
