@@ -4,13 +4,11 @@ import { Partido } from '../models/partidos.models';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
 })
-
 export class Tab3Page implements OnInit {
   partido: Partido | undefined;
   montoLocal: number = 0;
@@ -20,14 +18,18 @@ export class Tab3Page implements OnInit {
   totalEmpate: number = 0;
   totalVisitante: number = 0;
 
-  readonly multiplicadorLocal = 2.30;
-  readonly multiplicadorEmpate = 2.70;
-  readonly multiplicadorVisitante = 3.00;
+  readonly multiplicadorLocal = 2.3;
+  readonly multiplicadorEmpate = 2.7;
+  readonly multiplicadorVisitante = 3.0;
 
-  constructor(private route: ActivatedRoute, private alertController: AlertController) {}
+  constructor(
+    private route: ActivatedRoute,
+    private alertController: AlertController,
+    public router: Router
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['partido']) {
         this.partido = JSON.parse(params['partido']);
       }
@@ -52,25 +54,27 @@ export class Tab3Page implements OnInit {
         {
           text: 'Aceptar',
           handler: (data: any) => {
-            let esValido: boolean = this.validarInput(data);
+            console.log('Aca llega la data del toast ', data);
 
-            if (esValido){
-              const monto = parseFloat(data.monto);
+            if (!this.validarInput(data)) return false;
 
-              switch (tipo) {
-                case 'Local':
-                  this.montoLocal = monto;
-                  this.totalLocal = monto * this.multiplicadorLocal;
-                  return true;
-                case 'Empate':
-                  this.montoEmpate = monto;
-                  this.totalEmpate = monto * this.multiplicadorEmpate;
-                  return true;
-                case 'Visitante':
-                  this.montoVisitante = monto;
-                  this.totalVisitante = monto * this.multiplicadorVisitante;
-                  return true;
-              }
+            const monto = parseFloat(data.monto);
+
+            switch (tipo) {
+              case 'Local':
+                this.montoLocal = monto;
+                this.totalLocal = monto * this.multiplicadorLocal;
+                return true;
+              case 'Empate':
+                this.montoEmpate = monto;
+                this.totalEmpate = monto * this.multiplicadorEmpate;
+                return true;
+              case 'Visitante':
+                this.montoVisitante = monto;
+                this.totalVisitante = monto * this.multiplicadorVisitante;
+                return true;
+              default:
+                return false;
             }
           },
         },
@@ -82,7 +86,7 @@ export class Tab3Page implements OnInit {
   validarInput(input: any): boolean {
     if (input && input.monto) {
       if (!isNaN(input) || input > 0) {
-        return true
+        return true;
       }
     }
     this.presentToast('Debe ingresar un valor correcto');
@@ -91,8 +95,12 @@ export class Tab3Page implements OnInit {
 
   async presentToast(mensage: string) {
     let toast = await this.alertController.create({
-      message: mensage
+      message: mensage,
     });
     toast.present();
+  }
+
+  VolverAtras() {
+    this.router.navigate(['/login']);
   }
 }

@@ -46,13 +46,13 @@ export class DatabaseService {
       }
     }
 
-    async getUserBets(uid: string) {
-      const betsCollectionRef = collection(db, 'Apuestas'); 
-      const betsQuery = query(betsCollectionRef, where('userId', '==', uid));
-      const betDocs = await getDocs(betsQuery);
+    // async getUserBets(uid: string) {
+    //   const betsCollectionRef = collection(db, 'Apuestas'); 
+    //   const betsQuery = query(betsCollectionRef, where('userId', '==', uid));
+    //   const betDocs = await getDocs(betsQuery);
       
-      return betDocs.docs.map(doc => doc.data());
-    }
+    //   return betDocs.docs.map(doc => doc.data());
+    // }
 
     async presentToast() {
       const toast = await this.toastController.create({
