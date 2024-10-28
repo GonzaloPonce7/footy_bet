@@ -35,7 +35,7 @@ export class AuthenticationService {
     return sendPasswordResetEmail(this.auth, email);
   }
 
-  getCurrentUser() {
+  async getCurrentUser() {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {

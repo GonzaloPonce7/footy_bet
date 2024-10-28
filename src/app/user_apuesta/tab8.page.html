@@ -1,36 +1,16 @@
-<div class="contenedor">
-  <img src="assets/perfil.png" class="img-profile" alt="Logo">
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <div class="contenedor">
+        <p class="fuente">Bienvenido/a</p>
+      </div>
+      <ion-buttons class="back" slot="start" size="large">
+        <ion-button (click)="VolverAtras()">
+          <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
   
-  
-  <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="formulario">
-    <div class="miCuenta-contenedor">
-
-      <ion-toolbar>
-        <ion-title class="ion-text-start">Datos Personales</ion-title>
-      </ion-toolbar>
-
-      <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Apellido</ion-label>
-        <ion-input type="text" placeholder="Apellido" formControlName="apellido"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Correo Electronico</ion-label>
-        <ion-input type="text" placeholder="Correo Electronico" formControlName="correo"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Telefono</ion-label>
-        <ion-input type="text" placeholder="Telefono" formControlName="telefono"></ion-input>
-      </ion-item>
-
-    </div>
-
-    <ion-button fill="clear" type="submit" class="btn-guardar">Guardar Cambios</ion-button>
-
-</form>

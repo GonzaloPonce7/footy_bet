@@ -23,6 +23,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'user',
+    loadChildren: () => import('./user_apuesta/tab8.module').then((m) => m.Tab8PageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'crearcuenta',
     loadChildren: () => import('./register/tab2.module').then((m) => m.Tab2PageModule),
   },

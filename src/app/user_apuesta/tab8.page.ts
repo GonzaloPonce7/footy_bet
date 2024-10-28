@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {  FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { DatabaseService } from '../services/database.service';
+import { UserService } from '../services/user.service';
+import { ApuestasService } from '../services/apuestas.service';
+import { Apuestas } from '../models/apuestas.models'; 
 
 @Component({
   selector: 'app-tab8',
@@ -10,45 +12,31 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./tab8.page.scss'],
 })
 export class Tab8Page implements OnInit {
-  public formLogin: FormGroup;
-  uid: string = '';
+  userEmail: string = '';
+  apuestas: Apuestas[] | undefined;
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private database: DatabaseService
-  ) {
-    this.formLogin = new FormGroup({
-      nombre: new FormControl(''),
-      apellido: new FormControl(''),
-      correo: new FormControl(''),
-      telefono: new FormControl(''),
-      saldo: new FormControl(''),
-    });
-  }
-
-  //Implementar logica para buscar en base de datos las apuestas del usuario y mostrarlas.
+    private apuestasService: ApuestasService
+  ) {}
 
   ngOnInit() {
-    this.authService.getCurrentUser().then((user: any) => {
-      if (user) {
-        this.uid = user.uid;
-        this.loadUserProfile();
-      } else {
-        this.router.navigate(['/login']);
-      }
-    }).catch(error => {
-      console.error('Error getting user:', error);
-      this.router.navigate(['/login']);
-    });
+    this.obtenerApuestasUsuarioActual();
+    this.getCurrentUser();
   }
 
-  loadUserProfile() {
-    this.database.load(this.formLogin, this.uid, 'Apuestas')
+  async getCurrentUser() {
+    const response = await this.authService.getCurrentUser()
+    console.log("Aca vienel a respuesta al getCurrentUser: ", response);
   }
 
-  onSubmit() {
-    this.database.onSubmit(this.formLogin, this.uid, 'Usuarios');
+  VolverAtras() {
+    this.router.navigate(['/apuesta']);
+  }
+
+  async obtenerApuestasUsuarioActual() {
+    this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual()
   }
 
 }

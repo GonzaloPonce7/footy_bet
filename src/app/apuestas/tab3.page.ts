@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Partido } from '../models/partidos.models';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { ApuestasService } from '../services/apuestas.service';
+import { Apuestas } from '../models/apuestas.models';
 
 @Component({
   selector: 'app-tab3',
@@ -11,21 +13,18 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class Tab3Page implements OnInit {
   partido: Partido | undefined;
-  montoLocal: number = 0;
-  montoEmpate: number = 0;
-  montoVisitante: number = 0;
-  totalLocal: number = 0;
-  totalEmpate: number = 0;
-  totalVisitante: number = 0;
-
-  readonly multiplicadorLocal = 2.3;
-  readonly multiplicadorEmpate = 2.7;
-  readonly multiplicadorVisitante = 3.0;
+ 
+  readonly multiplicador = {
+    Empate: 2.7,
+    Local: 2.3,
+    Visitante: 3.0,
+  }
 
   constructor(
     private route: ActivatedRoute,
     private alertController: AlertController,
-    public router: Router
+    public router: Router,
+    private apuestasService: ApuestasService,
   ) {}
 
   ngOnInit() {
@@ -53,29 +52,37 @@ export class Tab3Page implements OnInit {
         },
         {
           text: 'Aceptar',
-          handler: (data: any) => {
+          handler: async (data: any) => {
             console.log('Aca llega la data del toast ', data);
 
             if (!this.validarInput(data)) return false;
 
             const monto = parseFloat(data.monto);
-
-            switch (tipo) {
-              case 'Local':
-                this.montoLocal = monto;
-                this.totalLocal = monto * this.multiplicadorLocal;
-                return true;
-              case 'Empate':
-                this.montoEmpate = monto;
-                this.totalEmpate = monto * this.multiplicadorEmpate;
-                return true;
-              case 'Visitante':
-                this.montoVisitante = monto;
-                this.totalVisitante = monto * this.multiplicadorVisitante;
-                return true;
-              default:
-                return false;
+            if (!this.partido || (tipo !=  'Local' && tipo !=  'Empate' && tipo !=  'Visitante')) {
+              return false
             }
+
+            const nuevaApuesta: Apuestas = {
+              id: '',
+              userId: '',
+              partidoId: this.partido.id,
+              fechaApuesta: new Date().toString(),
+              fechaPartido: this.partido.date,
+              resultadoApostado: tipo,
+              partido: `${this.partido.local} VS ${this.partido.visitor}`,
+              estado: 'pendiente',
+              multiplicador: this.multiplicador[tipo],
+              monto: monto
+          };
+          try {
+            await this.apuestasService.crearApuesta(nuevaApuesta)
+            this.router.navigate(['/user'])
+            return true
+          } catch (error) {
+            console.error()
+            return false
+          }
+
           },
         },
       ],
@@ -101,6 +108,6 @@ export class Tab3Page implements OnInit {
   }
 
   VolverAtras() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 }

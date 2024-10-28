@@ -23,18 +23,18 @@
         <ion-item (click)="ingresarMonto('Local')">
           <ion-label>Local: {{ partido.local }}</ion-label>
           <ion-img [src]="partido.local_shield"></ion-img>
-          <ion-note *ngIf="montoLocal > 0">Monto: {{ montoLocal }} - Total: {{ totalLocal | currency }}</ion-note>
+          <!-- <ion-note *ngIf="monto > 0">Monto: {{ montoLocal }} - Total: {{ totalLocal | currency }}</ion-note> -->
         </ion-item>
   
         <ion-item (click)="ingresarMonto('Empate')">
           <ion-label>Empate</ion-label>
-          <ion-note *ngIf="montoEmpate > 0">Monto: {{ montoEmpate }} - Total: {{ totalEmpate | currency }}</ion-note>
+          <!-- <ion-note *ngIf="montoEmpate > 0">Monto: {{ montoEmpate }} - Total: {{ totalEmpate | currency }}</ion-note> -->
         </ion-item>
   
         <ion-item (click)="ingresarMonto('Visitante')">
           <ion-label>Visitante: {{ partido.visitor }}</ion-label>
           <ion-img [src]="partido.visitor_shield"></ion-img>
-          <ion-note *ngIf="montoVisitante > 0">Monto: {{ montoVisitante }} - Total: {{ totalVisitante | currency }}</ion-note>
+          <!-- <ion-note *ngIf="montoVisitante > 0">Monto: {{ montoVisitante }} - Total: {{ totalVisitante | currency }}</ion-note> -->
         </ion-item>
       </ion-card-content>
     </ion-card>
