@@ -1,6 +1,6 @@
 export interface Apuestas {
     id: string
-    userId: string
+    userId: string | null
     partidoId: string
     fechaApuesta: string
     fechaPartido: string

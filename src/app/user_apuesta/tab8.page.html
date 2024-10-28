@@ -12,5 +12,50 @@
     </ion-toolbar>
   </ion-header>
 
+  <div class="user-info">
+    <h2>Usuario: {{ userEmail }}</h2>
+  </div>
 
-  
+  <div *ngIf="!apuestas">
+    <ion-text>
+      <h4>Cargando</h4>
+    </ion-text>
+  </div>
+
+  <div class="apuesta-list" *ngIf="apuestas">
+    <ion-list *ngIf="apuestas && apuestas.length > 0; else noApuestas">
+      <ion-item *ngFor="let apuesta of apuestas" lines="none">
+        <div class="apuesta-card">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ apuesta.partido }}</ion-card-title>
+              <p>Fecha de apuesta: {{ apuesta.fechaApuesta }}</p>
+              <p>Fecha de partido: {{ apuesta.fechaPartido }}</p>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p>Resultado apostado: {{ apuesta.resultadoApostado }}</p>
+              <p>Estado: {{ apuesta.estado }}</p>
+              <p>Multiplicador: {{ apuesta.multiplicador }}</p>
+              <p>Monto: {{ apuesta.monto | currency }}</p>
+
+              <ion-button
+                expand="full"
+                color="primary"
+                (click)="exportarAPdf(apuesta)"
+              >
+                Exportar a PDF
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #noApuestas>
+      <ion-text>
+        <h4>No hay apuestas disponibles.</h4>
+      </ion-text>
+    </ng-template>
+  </div>
+</ion-content>

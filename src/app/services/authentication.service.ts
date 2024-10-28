@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail, User } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 @Injectable({
@@ -35,11 +35,11 @@ export class AuthenticationService {
     return sendPasswordResetEmail(this.auth, email);
   }
 
-  async getCurrentUser() {
+  async getCurrentUser(): Promise<User | null> {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
-          resolve(user);
+          resolve(user as User);
         } else {
           reject('No user logged in');
         }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
@@ -12,7 +11,7 @@ import { Apuestas } from '../models/apuestas.models';
   styleUrls: ['./tab8.page.scss'],
 })
 export class Tab8Page implements OnInit {
-  userEmail: string = '';
+  userEmail: string | null = null;
   apuestas: Apuestas[] | undefined;
 
   constructor(
@@ -23,20 +22,34 @@ export class Tab8Page implements OnInit {
 
   ngOnInit() {
     this.obtenerApuestasUsuarioActual();
-    this.getCurrentUser();
+    this.getCurrentUserEmail();
   }
 
-  async getCurrentUser() {
-    const response = await this.authService.getCurrentUser()
-    console.log("Aca vienel a respuesta al getCurrentUser: ", response);
+  async getCurrentUserEmail() {
+    try {
+      const userResponse = await this.authService.getCurrentUser();
+      
+      if (userResponse) {
+        this.userEmail = userResponse.email;
+      } else {
+        console.log("No hay usuario logueado");
+      }
+    } catch (error) {
+      console.error("Error al obtener el usuario:", error);
+    }
   }
 
   VolverAtras() {
-    this.router.navigate(['/apuesta']);
+    this.router.navigate(['/home']);
   }
 
   async obtenerApuestasUsuarioActual() {
     this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual()
+  }
+
+  exportarAPdf(apuesta: Apuestas) {
+    // Implementa la lógica de exportación a PDF aquí
+    console.log("Exportando a PDF la apuesta:", apuesta);
   }
 
 }

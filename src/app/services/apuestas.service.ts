@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class ApuestasService {
   
-  private collectionName = 'apuestas';
+  private collectionName = 'Apuestas';
   
   constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) { }
 
