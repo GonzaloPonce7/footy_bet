@@ -131,4 +131,8 @@ export class Tab3Page implements OnInit {
   VolverAtras() {
     this.router.navigate(['/home']);
   }
+
+  irUser(){
+    this.router.navigate(['/user']);
+  }
 }

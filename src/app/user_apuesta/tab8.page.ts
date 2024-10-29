@@ -51,7 +51,6 @@ export class Tab8Page implements OnInit {
   exportarAPdf(apuesta: Apuestas) {
     const doc = new jsPDF();
 
-    // Configuración del PDF
     doc.setFontSize(16);
     doc.text('Comprobante de Apuesta', 20, 20);
 
@@ -65,7 +64,6 @@ export class Tab8Page implements OnInit {
     doc.text(`Multiplicador: ${apuesta.multiplicador}`, 20, 90);
     doc.text(`Monto Apostado: ${apuesta.monto}`, 20, 100);
 
-    // Guarda el PDF
     doc.save(`Comprobante_Apuesta_${apuesta.partido}.pdf`);
   }
 
