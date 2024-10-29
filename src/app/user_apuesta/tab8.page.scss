@@ -1,84 +1,60 @@
-//MI CUENTA
-.contenedor{
+ion-content {
     --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
-}
-.miCuenta-contenedor {
-    background: rgba(0, 0, 0, 0.5);
-    margin: 20px;
-    border-radius: 10px;
-    padding-bottom: 20px;
-}
-
-.miCuenta-contenedor ion-toolbar, ion-item {
-    --background: none;
-}
-
-.miCuenta-contenedor ion-item {
-    padding-right: 15px;
-}
-
-//IMAGEN PERFIL
-
-.img-profile {
-        width: 150px;
-        height: 150px;
-        margin-top: 45px !important;
-        gap: 0px;
-        opacity: 0px;
-        margin-bottom: 0px !important;
-}
-
-.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 100%;
     width: 100%;
-    text-align: center; /* Esto centra el contenido dentro del div */
 }
 
-.input  {
-    width: 298px;
-    height: 41px;
-    display: block !important;
-     margin-top: 20px;
-    background: white;
-    color: black;
-    border-radius: 10px;
-    }
-
-    h3 {
-        text-align: left !important;
-      }
-
-.imgsig{      margin-top: 20px;}
-
-
-.img-profile {
-    width: 150px;
-    height: 150px;
-    margin-top: 45px !important;
-    gap: 0px;
-    opacity: 0px;
-    margin-bottom: 0px !important;
+.md list-md.hydrated {
+    background-color: transparent;
 }
 
-  //BOTONES
-
-  .btn-guardar {
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    background: #3F236A;
-    font-size: 15px !important;
-    font-weight: 200 !important;
-    color: white;
-    text-transform: none;
+.apuesta-list {
+    width: 100%;
+    max-width: 500px; 
+    padding: 10px;
 }
 
-.btn-cerrar {
-    padding: 5px;
-    margin: 5px;
+.apuesta-card {
+    text-align: center;
+    border: 1px solid #110eb9;
     border-radius: 10px;
-    background: #3F236A;
-    font-size: 15px !important;
-    font-weight: 200 !important;
-    color: white;
-    text-transform: none;
+    margin-bottom: 20px;
+    background: #3fb630;
+    background-color: #3fb630;
+    box-shadow: 0 2px 8px rgba(11, 151, 86, 0.2);
+}
+
+ion-card{
+    background-color: dimgrey;
+}
+
+.apuesta-card ion-card-title {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.apuesta-card p {
+    margin: 5px 0;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+ion-button {
+    margin-top: 15px;
+    font-weight: bold;
+    --background: #ffcc00;
+    --color: #000;
+}
+
+.noApuestas-text {
+    font-size: 1.1em;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
 }

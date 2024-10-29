@@ -12,20 +12,34 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="match-list"> <!-- Contenedor adicional para centrar -->
-    <ion-list *ngIf="partidosPremier.length > 0; else noData">
-      <ion-item *ngFor="let partido of partidosPremier" lines="none"> <!-- Eliminado el borde de las líneas -->
+  <div *ngIf="!partidosPremier">
+    <ion-text>
+      <h4>Cargando</h4>
+    </ion-text>
+  </div>
+
+  <div class="match-list" *ngIf="partidosPremier">
+    <ion-list *ngIf="partidosPremier && partidosPremier.length > 0; else noData">
+      <ion-item *ngFor="let partido of partidosPremier" lines="none">
         <div class="match-card">
           <h3>{{ partido.competition_name }}</h3>
 
           <div class="teams-container">
             <div class="team">
-              <img [src]="partido.local_shield" alt="Escudo Local" class="team-logo">
+              <img
+                [src]="partido.local_shield"
+                alt="Escudo Local"
+                class="team-logo"
+              />
               <span>{{ partido.local }}</span>
             </div>
             <span class="vs-text">VS</span>
             <div class="team">
-              <img [src]="partido.visitor_shield" alt="Escudo Visitante" class="team-logo">
+              <img
+                [src]="partido.visitor_shield"
+                alt="Escudo Visitante"
+                class="team-logo"
+              />
               <span>{{ partido.visitor }}</span>
             </div>
           </div>
@@ -35,8 +49,14 @@
           </div>
 
           <div class="match-result">
-            <p *ngIf="esPartidoJugado(partido.date)">Resultado: {{ partido.result }}</p>
-            <ion-button *ngIf="!esPartidoJugado(partido.date)" (click)="apostar(partido)">Apostar</ion-button>
+            <p *ngIf="esPartidoJugado(partido.date)">
+              Resultado: {{ partido.result }}
+            </p>
+            <ion-button
+              *ngIf="!esPartidoJugado(partido.date)"
+              (click)="apostar(partido)"
+              >Apostar</ion-button
+            >
           </div>
         </div>
       </ion-item>
@@ -47,5 +67,14 @@
         <h4>No hay partidos disponibles.</h4>
       </ion-text>
     </ng-template>
+
   </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button class="Bfix" (click)="irUser()">
+      <ion-icon name="cash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
 </ion-content>

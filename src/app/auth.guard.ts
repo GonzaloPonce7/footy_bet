@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth'; // Cambia esto si estás usando compat
+import { AngularFireAuth } from '@angular/fire/compat/auth'; 
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -15,10 +15,12 @@ export class AuthGuard implements CanActivate {
     return this.afAuth.authState.pipe(
       take(1),
       map(user => {
+        console.log("Aca viene el user " + user);
+        
         if (user) {
           return true;
         } else {
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
           return false;
         }
       })

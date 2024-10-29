@@ -5,7 +5,7 @@ import { AuthGuard } from './auth.guard'; // Asegúrate de que la ruta sea corre
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',  // Redirige la ruta base a /login
+    redirectTo: 'login', 
     pathMatch: 'full'
   },
   {
@@ -18,13 +18,23 @@ const routes: Routes = [
     loadChildren: () => import('./login/tab1.module').then((m) => m.Tab1PageModule),
   },
   {
+    path: 'apuesta',
+    loadChildren: () => import('./apuestas/tab3.module').then((m) => m.Tab3PageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user_apuesta/tab8.module').then((m) => m.Tab8PageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'crearcuenta',
     loadChildren: () => import('./register/tab2.module').then((m) => m.Tab2PageModule),
   },
   {
     path: 'home',
     loadChildren: () => import('./home/tab11.module').then((m) => m.Tab11PageModule),
-    canActivate: [AuthGuard]  // Añade el AuthGuard aquí
+    canActivate: [AuthGuard] 
   },
 ];
 @NgModule({

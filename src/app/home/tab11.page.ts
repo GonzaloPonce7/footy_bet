@@ -10,8 +10,10 @@ import { Partido } from '../models/partidos.models';
   styleUrls: ['tab11.page.scss'],
 })
 export class Tab11Page implements OnInit {
-  partidosPremier: Partido[] = [];
 
+  partidosPremier: Partido[] | undefined;
+  selectedPartido: Partido | undefined;
+  
   constructor(
     public router: Router,
     private homeService: HomeService,
@@ -34,7 +36,7 @@ export class Tab11Page implements OnInit {
       fechaLimite.setDate(fechaActual.getDate() + 5);
 
       this.partidosPremier = partidosDelDia.matches
-        .filter((p: any) => this.enSiguientesSieteDias(p.utcDate, fechaActual, fechaLimite))
+        .filter((p: any) => this.enSiguientesCincoDias(p.utcDate, fechaActual, fechaLimite))
         .map((p: any) => {
           return {
             id: p.id,
@@ -54,12 +56,11 @@ export class Tab11Page implements OnInit {
     }
   }
 
-  enSiguientesSieteDias(fechaPartido: string, fechaActual: Date, fechaLimite: Date): boolean {
+  enSiguientesCincoDias(fechaPartido: string, fechaActual: Date, fechaLimite: Date): boolean {
     const fechaHoraPartido = new Date(fechaPartido);
     return fechaHoraPartido >= fechaActual && fechaHoraPartido <= fechaLimite;
   }
 
-  // Aquí se añade la función que faltaba
   esPartidoJugado(fechaPartido: string): boolean {
     const fechaHoraPartido = new Date(fechaPartido);
     const fechaHoraActual = new Date();
@@ -67,6 +68,8 @@ export class Tab11Page implements OnInit {
   }
 
   apostar(partido: any) {
+    this.selectedPartido = partido;
+
     this.navCtrl.navigateForward('/apuesta', {
       queryParams: { partido: JSON.stringify(partido) },
     });
@@ -74,5 +77,9 @@ export class Tab11Page implements OnInit {
 
   VolverAtras() {
     this.router.navigate(['/login']);
+  }
+
+  irUser(){
+    this.router.navigate(['/user']);
   }
 }

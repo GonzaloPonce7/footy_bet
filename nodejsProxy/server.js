@@ -21,8 +21,8 @@ app.get("/proxy", async (req, res) => {
     console.log(`Fetching data from: ${url}`);
     const response = await axios.get(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0", // Simular una solicitud del navegador
-        "X-Auth-Token": "feab5e72ee94431db81526ae1dd56d58", // Asegúrate de que este token sea válido
+        "User-Agent": "Mozilla/5.0", 
+        "X-Auth-Token": "feab5e72ee94431db81526ae1dd56d58", 
       },
     });
     res.json(response.data);
