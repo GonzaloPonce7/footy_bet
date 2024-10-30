@@ -1,14 +1,19 @@
 <ion-content>
   <ion-header [translucent]="true">
     <ion-toolbar>
-      <div class="contenedor">
-        <p class="fuente">Bienvenido/a</p>
-      </div>
       <ion-buttons class="back" slot="start" size="large">
         <ion-button (click)="VolverAtras()">
           <ion-icon name="arrow-back-outline" size="large"></ion-icon>
         </ion-button>
       </ion-buttons>
+
+      <div class="contenedor" slot="start">
+        <p class="fuente">Bienvenido/a</p>
+      </div>
+      
+      <div class="contenedor" slot="end">
+        <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
+      </div>
     </ion-toolbar>
   </ion-header>
 

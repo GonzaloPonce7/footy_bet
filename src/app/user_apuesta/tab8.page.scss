@@ -58,3 +58,14 @@ ion-button {
     text-align: center;
     margin-top: 20px;
 }
+
+ion-toolbar .contenedor {
+    display: flex;
+    align-items: center;
+  }
+  
+  ion-toolbar .contenedor img {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el logo y el texto */
+  }
