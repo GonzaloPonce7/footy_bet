@@ -13,7 +13,7 @@ export class Tab11Page implements OnInit {
 
   partidosPremier: Partido[] | undefined;
   selectedPartido: Partido | undefined;
-  
+
   constructor(
     public router: Router,
     private homeService: HomeService,
@@ -22,10 +22,13 @@ export class Tab11Page implements OnInit {
 
   ngOnInit() {
     console.log('Inicia el home');
-
     this.partidosProximos();
   }
 
+  /**
+   * @function partidosProximos
+   * @description Llama al servicio para obtener los partidos y filtra aquellos que ocurren en los próximos 5 días.
+   */
   async partidosProximos() {
     try {
       const partidosDelDia: any = await this.homeService.getPartidos();
@@ -56,17 +59,36 @@ export class Tab11Page implements OnInit {
     }
   }
 
+  /**
+   * @function enSiguientesCincoDias
+   * @description Verifica si la fecha del partido cae dentro de los próximos cinco días.
+   * @param {string} fechaPartido - Fecha y hora del partido.
+   * @param {Date} fechaActual - Fecha actual.
+   * @param {Date} fechaLimite - Fecha límite de cinco días a partir de la fecha actual.
+   * @returns {boolean} - Verdadero si el partido está dentro del rango; falso si no.
+   */
   enSiguientesCincoDias(fechaPartido: string, fechaActual: Date, fechaLimite: Date): boolean {
     const fechaHoraPartido = new Date(fechaPartido);
     return fechaHoraPartido >= fechaActual && fechaHoraPartido <= fechaLimite;
   }
 
+  /**
+   * @function esPartidoJugado
+   * @description Determina si un partido ya ha sido jugado comparando su fecha con la fecha actual.
+   * @param {string} fechaPartido - Fecha y hora del partido.
+   * @returns {boolean} - Verdadero si el partido ya fue jugado; falso si no.
+   */
   esPartidoJugado(fechaPartido: string): boolean {
     const fechaHoraPartido = new Date(fechaPartido);
     const fechaHoraActual = new Date();
     return fechaHoraPartido <= fechaHoraActual;
   }
 
+  /**
+   * @function apostar
+   * @description Navega a la página de apuesta, pasando el partido seleccionado como parámetro.
+   * @param {any} partido - Objeto del partido seleccionado.
+   */
   apostar(partido: any) {
     this.selectedPartido = partido;
 
@@ -75,10 +97,18 @@ export class Tab11Page implements OnInit {
     });
   }
 
+  /**
+   * @function VolverAtras
+   * @description Navega de regreso a la página de login.
+   */
   VolverAtras() {
     this.router.navigate(['/login']);
   }
 
+  /**
+   * @function irUser
+   * @description Navega a la página de usuario.
+   */
   irUser(){
     this.router.navigate(['/user']);
   }

@@ -40,6 +40,11 @@ export class Tab3Page implements OnInit {
     this.getCurrentUserId();
   }
 
+  /**
+   * @function ingresarMonto
+   * @description Muestra una alerta para que el usuario ingrese el monto de su apuesta y guarda la apuesta si el monto es válido.
+   * @param {string} tipo - Tipo de apuesta: 'Local', 'Empate', o 'Visitante'.
+   */
   async ingresarMonto(tipo: string) {
     const toast = await this.alertController.create({
       header: `Ingrese su apuesta para ${tipo}`,
@@ -97,6 +102,12 @@ export class Tab3Page implements OnInit {
     await toast.present();
   }
 
+  /**
+   * @function validarInput
+   * @description Verifica que el monto ingresado sea un número válido mayor que cero.
+   * @param {any} input - Objeto que contiene el monto ingresado por el usuario.
+   * @returns {boolean} - Verdadero si el monto es válido; falso si no.
+   */
   validarInput(input: any): boolean {
     if (input && input.monto) {
       if (!isNaN(input.monto) || input.monto > 0) {
@@ -107,13 +118,22 @@ export class Tab3Page implements OnInit {
     return false;
   }
 
-  async presentToast(mensage: string) {
+  /**
+   * @function presentToast
+   * @description Muestra un mensaje de alerta en pantalla.
+   * @param {string} mensaje - Mensaje a mostrar en el toast.
+   */
+  async presentToast(mensaje: string) {
     let toast = await this.alertController.create({
-      message: mensage,
+      message: mensaje,
     });
     toast.present();
   }
 
+  /**
+   * @function getCurrentUserId
+   * @description Obtiene el ID del usuario actual y lo asigna a la variable userId.
+   */
   async getCurrentUserId() {
     try {
       const userResponse = await this.authService.getCurrentUser();
@@ -128,10 +148,18 @@ export class Tab3Page implements OnInit {
     }
   }
 
+  /**
+   * @function VolverAtras
+   * @description Navega de regreso a la página de inicio.
+   */
   VolverAtras() {
     this.router.navigate(['/home']);
   }
 
+  /**
+   * @function irUser
+   * @description Navega a la página de usuario.
+   */
   irUser(){
     this.router.navigate(['/user']);
   }

@@ -7,17 +7,24 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
 })
+
 export class Tab2Page {
   showPassword = false;
-
   password: string = '';
   email: string = '';
   tipoerror: any = '';
+
   constructor(
     public auth: AuthenticationService,
     public router: Router,
     private toastController: ToastController
   ) {}
+
+  /**
+   * @function register
+   * @description Realiza el registro del usuario con el correo y la contraseña ingresados.
+   * Si es exitoso, muestra un mensaje y redirige a la página de inicio de sesión; en caso de error, muestra un mensaje de error.
+   */
   async register() {
     this.auth
       .signUp(this.email, this.password)
@@ -28,7 +35,6 @@ export class Tab2Page {
           this.router.navigate(['login']);
         }, 3000);
       })
-
       .catch((error: any) => {
         console.log(error.code);
         this.tipoerror = error.code;
@@ -36,10 +42,18 @@ export class Tab2Page {
       });
   }
 
+  /**
+   * @function backToLogin
+   * @description Navega de regreso a la página de inicio de sesión.
+   */
   backToLogin() {
     this.router.navigate(['login']);
   }
 
+  /**
+   * @function presentToast
+   * @description Muestra un mensaje de confirmación al usuario tras un registro exitoso.
+   */
   async presentToast() {
     const toast = await this.toastController.create({
       header: 'Registro exitoso',
@@ -56,6 +70,11 @@ export class Tab2Page {
     toast.present(); 
   }
 
+  /**
+   * @function ErrorToast
+   * @description Muestra un mensaje de error en caso de fallo durante el registro, dependiendo del tipo de error.
+   * @param {any} tipoerror - Código de error recibido durante el proceso de registro.
+   */
   async ErrorToast(tipoerror: any) {
     let message = 'Registro fallido';
 
@@ -66,7 +85,7 @@ export class Tab2Page {
     } else if (tipoerror === 'auth/weak-password') {
       message = 'La contraseña debe tener mínimo 6 caracteres.';
     } else {
-      message = 'Error en el resgistro, verifique los datos: ';
+      message = 'Error en el registro, verifique los datos: ';
     }
 
     const toast = await this.toastController.create({
@@ -84,3 +103,4 @@ export class Tab2Page {
     toast.present(); 
   }
 }
+

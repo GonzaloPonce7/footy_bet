@@ -11,6 +11,7 @@ import { jsPDF } from 'jspdf';
   templateUrl: './tab8.page.html',
   styleUrls: ['./tab8.page.scss'],
 })
+
 export class Tab8Page implements OnInit {
   userEmail: string | null = null;
   apuestas: Apuestas[] | undefined;
@@ -26,6 +27,10 @@ export class Tab8Page implements OnInit {
     this.getCurrentUserEmail();
   }
 
+  /**
+   * @function getCurrentUserEmail
+   * @description Obtiene el correo electrónico del usuario actual y lo asigna a la variable userEmail.
+   */
   async getCurrentUserEmail() {
     try {
       const userResponse = await this.authService.getCurrentUser();
@@ -40,14 +45,27 @@ export class Tab8Page implements OnInit {
     }
   }
 
+  /**
+   * @function VolverAtras
+   * @description Navega de regreso a la página de inicio.
+   */
   VolverAtras() {
     this.router.navigate(['/home']);
   }
 
+  /**
+   * @function obtenerApuestasUsuarioActual
+   * @description Carga las apuestas realizadas por el usuario actual y las asigna a la variable apuestas.
+   */
   async obtenerApuestasUsuarioActual() {
-    this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual()
+    this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual();
   }
 
+  /**
+   * @function exportarAPdf
+   * @description Genera un comprobante en PDF para una apuesta seleccionada, mostrando sus detalles.
+   * @param {Apuestas} apuesta - Objeto de apuesta del cual se generará el PDF.
+   */
   exportarAPdf(apuesta: Apuestas) {
     const doc = new jsPDF();
 
@@ -66,5 +84,5 @@ export class Tab8Page implements OnInit {
 
     doc.save(`Comprobante_Apuesta_${apuesta.partido}.pdf`);
   }
-
 }
+

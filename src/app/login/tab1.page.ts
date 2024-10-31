@@ -14,10 +14,9 @@ import { map, take } from 'rxjs/operators';
 
 export class Tab1Page implements OnInit {
   showPassword = false;
-
   password: string = '';
   email: string = '';
-  tipoerrorlogin:any='';
+  tipoerrorlogin: any = '';
 
   constructor(
     public auth: AuthenticationService,
@@ -35,43 +34,60 @@ export class Tab1Page implements OnInit {
         console.log("Aca viene el user " + user);
         if (user) {
           console.log("hay usuario");
-          
           this.router.navigate(['/home']);
           return true;
         } else {
           console.log("no hay usuario");
           this.router.navigate(['login']);
-
           return false;
         }
       })
     );
   }
 
+  /**
+   * @function loginUser
+   * @description Inicia sesión con correo y contraseña. 
+   * Si es exitoso, redirige a la página principal; en caso de error, muestra un mensaje de error.
+   */
   async loginUser() {
     this.auth.logIn(this.email, this.password).then((userCredential) => {
-      this.router.navigate(['/home'])
-    
+      this.router.navigate(['/home']);
     }).catch((error: any) => {
       console.log(error.code);
       this.tipoerrorlogin = error.code;
-    this.ErrorToastlogin(this.tipoerrorlogin);
+      this.ErrorToastlogin(this.tipoerrorlogin);
     });
-
   }
+
+  /**
+   * @function loginGoogle
+   * @description Inicia sesión con Google y redirige a la página principal si es exitoso.
+   * Muestra una alerta en caso de error de autenticación.
+   */
   async loginGoogle() {
     this.auth.logInGoogle().then((userCredential) => {
-      this.router.navigate(['/home'])
+      this.router.navigate(['/home']);
     }).catch((error) => {
       console.log(error.code);
       alert('Google Error.');
     });
   }
+
+  /**
+   * @function register
+   * @description Navega a la página de registro de cuenta.
+   */
   register() {
-    this.router.navigate(['crearcuenta'])
+    this.router.navigate(['crearcuenta']);
   }
 
-  async ErrorToastlogin(tipoerror:any) {
+  /**
+   * @function ErrorToastlogin
+   * @description Muestra un mensaje de error al usuario cuando el inicio de sesión falla.
+   * @param {any} tipoerror - Código del error recibido durante el inicio de sesión.
+   */
+  async ErrorToastlogin(tipoerror: any) {
     let message = 'Contraseña o correo electrónico inválidos';
 
     const toast = await this.toastController.create({
@@ -89,9 +105,11 @@ export class Tab1Page implements OnInit {
     toast.present();
   }
 
+  /**
+   * @function VolverAtras
+   * @description Redirige al usuario a la página principal.
+   */
   VolverAtras() {
     this.router.navigate(['/home']);
   }
-
-
 }
