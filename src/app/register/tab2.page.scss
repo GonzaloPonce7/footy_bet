@@ -4,7 +4,6 @@
 }
 
 .fuente {
-  //styleName: Subtitulos;
   font-family: Roboto;
   font-size: 20px;
   font-weight: 600;
@@ -14,42 +13,66 @@
 }
 
 .fuente2 {
-  /* Estilos específicos solo para el segundo elemento */
-  font-size: 15px !important; /* Tamaño de fuente diferente */
+  font-size: 15px !important;
   font-weight: 200 !important;
   color: antiquewhite;
-  //margin-top: 15px;
   margin-bottom: 15px;
 }
 
 ion-content {
-  --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
+  --background: linear-gradient(to bottom,#4edd3b,#236a23) !important;
+}
+
+.form-container {
+  width: 100%; /* Asegura que el contenedor use todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho máximo del formulario */
+  margin: 0 auto; /* Centra el contenedor del formulario */
 }
 
 .input {
-  width: 298px;
+  width: 300px; /* Tamaño uniforme para todos los inputs */
   height: 41px;
-  display: block !important;
+  border-radius: 10px;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  background: white;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+  width: 300px; /* Asegúrate de que sea igual al ancho del input */
   margin: auto;
   margin-top: 20px;
 }
 
+.password-icon {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
 ion-button {
-  display: block; /* Hace que el botón se muestre como un bloque */
+  display: block;
   margin: auto;
   height: 38px;
   margin-top: 20px;
-  opacity: 0px;
-  width: 200px;
+  width: 200px; /* Tamaño fijo para los botones */
 }
 
 .lineaseparadora {
   width: 284px;
-  height: 0px;
+  height: 0;
   color: antiquewhite;
   margin: auto;
-  border: 1px 0px 0px 0px;
-  opacity: 0px;
   border: 1px solid #ffffff;
   margin-top: 15px;
 }
@@ -58,19 +81,6 @@ img {
   margin: auto;
   display: block;
   width: 200px;
-
-}
-
-.input {
-  width: 300px;
-  height: 41px;
-  border-radius: 10px;
-  display: block !important;
-  margin: auto;
-  margin-top: 20px;
-  background: white;
-  color: black;
-  text-align: center;
 }
 
 .register:active {
@@ -96,4 +106,16 @@ img {
 
 .back:active {
   transform: scale(0.9);
+}
+
+.validation-message {
+  margin-top: 10px;
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  
 }

@@ -33,31 +33,51 @@ export class Tab11Page implements OnInit {
     try {
       const partidosDelDia: any = await this.homeService.getPartidos();
       console.log('Partidos del día:', partidosDelDia);
-
+  
       const fechaActual = new Date();
       const fechaLimite = new Date();
       fechaLimite.setDate(fechaActual.getDate() + 5);
-
+  
       this.partidosPremier = partidosDelDia.matches
         .filter((p: any) => this.enSiguientesCincoDias(p.utcDate, fechaActual, fechaLimite))
         .map((p: any) => {
+          const fechaPartido = new Date(p.utcDate);
+          
+          // Formato de fecha y hora en horario de Argentina
+          const opcionesFecha: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+          const opcionesHora: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: false, timeZone: 'America/Argentina/Buenos_Aires' };
+          
+          const fechaFormateada = new Intl.DateTimeFormat('es-AR', opcionesFecha).format(fechaPartido);
+          const horaFormateada = new Intl.DateTimeFormat('es-AR', opcionesHora).format(fechaPartido);
+
+          let estado: string;
+        if (this.esPartidoJugado(p.utcDate)) {
+          estado = 'Finalizado';
+        } else if (fechaPartido > fechaActual) {
+          estado = 'Pendiente';
+        } else {
+          estado = 'Jugando';
+        }
+  
           return {
             id: p.id,
             local: p.homeTeam.name,
             visitor: p.awayTeam.name,
             competition_name: p.competition.name,
-            date: p.utcDate,
+            date: fechaFormateada,
+            time: horaFormateada,
             local_shield: p.homeTeam.crest,
             visitor_shield: p.awayTeam.crest,
-            result: p.status
+            status: estado
           } as Partido;
         });
-
+  
       console.log('Partidos Premier próximos 5 días:', this.partidosPremier);
     } catch (error) {
       console.error('Error al cargar los partidos:', error);
     }
   }
+  
 
   /**
    * @function enSiguientesCincoDias

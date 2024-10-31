@@ -1,22 +1,22 @@
+<ion-header translucent="true">
+  <ion-toolbar slot="fixed">
+    <ion-buttons class="back" slot="start" size="large">
+      <ion-button (click)="VolverAtras()">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <div class="contenedor" slot="start">
+      <p class="fuente">Bienvenido/a</p>
+    </div>
+
+    <div class="contenedor" slot="end">
+      <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-buttons class="back" slot="start" size="large">
-        <ion-button (click)="VolverAtras()">
-          <ion-icon name="arrow-back-outline" size="large"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-      <div class="contenedor" slot="start">
-        <p class="fuente">Bienvenido/a</p>
-      </div>
-      
-      <div class="contenedor" slot="end">
-        <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
-      </div>
-    </ion-toolbar>
-  </ion-header>
-
   <div *ngIf="!partidosPremier">
     <ion-text>
       <h4>Cargando</h4>
@@ -51,17 +51,17 @@
 
           <div class="match-info">
             <p>Fecha: {{ partido.date }}</p>
+            <p>Hora: {{ partido.time }}</p>
           </div>
 
           <div class="match-result">
-            <p *ngIf="esPartidoJugado(partido.date)">
-              Resultado: {{ partido.result }}
-            </p>
+            <p>Estado: {{ partido.status }}</p> 
             <ion-button
-              *ngIf="!esPartidoJugado(partido.date)"
+              *ngIf="partido.status === 'Pendiente'"
               (click)="apostar(partido)"
-              >Apostar</ion-button
             >
+              Apostar
+            </ion-button>
           </div>
         </div>
       </ion-item>
@@ -72,7 +72,6 @@
         <h4>No hay partidos disponibles.</h4>
       </ion-text>
     </ng-template>
-
   </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
@@ -80,6 +79,4 @@
       <ion-icon name="person"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
 </ion-content>

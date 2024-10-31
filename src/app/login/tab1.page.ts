@@ -17,6 +17,7 @@ export class Tab1Page implements OnInit {
   password: string = '';
   email: string = '';
   tipoerrorlogin: any = '';
+  iconName: string = 'eye-outline';
 
   constructor(
     public auth: AuthenticationService,
@@ -45,6 +46,10 @@ export class Tab1Page implements OnInit {
     );
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    this.iconName = this.showPassword ? 'eye-off-outline' : 'eye-outline';
+  }
   /**
    * @function loginUser
    * @description Inicia sesión con correo y contraseña. 

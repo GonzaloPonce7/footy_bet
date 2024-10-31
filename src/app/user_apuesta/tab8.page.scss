@@ -1,65 +1,78 @@
 ion-content {
-    --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  --background: linear-gradient(to bottom, #4edd3b, #236a23) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: 116px;
+
+
+}
+  
+  ion-list {
+    background: transparent;
     padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-}
-
-.md list-md.hydrated {
-    background-color: transparent;
-}
-
-.apuesta-list {
-    width: 100%;
-    max-width: 500px; 
-    padding: 10px;
-}
-
-.apuesta-card {
+    margin: 0 auto;
+    width: 100%; /* Asegura que use el ancho completo */
+    display: flex; /* Cambiado de inline-flex a flex */
+    flex-direction: column;
+    align-items: center; /* Centra las tarjetas en la columna */
+  }
+  
+  ion-item {
+    --background: transparent;
+    --min-height: auto;
+    border: none;
+  }
+  
+  .apuesta-card {
+    align-items: center;
     text-align: center;
     border: 1px solid #110eb9;
     border-radius: 10px;
     margin-bottom: 20px;
-    background: #3fb630;
-    background-color: #3fb630;
+    background: rgba(63, 182, 48, 0.8); /* Color con opacidad */
     box-shadow: 0 2px 8px rgba(11, 151, 86, 0.2);
-}
+    transition: transform 0.2s; /* Añadir una transición para el hover */
+    
 
-ion-card{
+  }
+  
+  ion-card {
     background-color: dimgrey;
-}
-
-.apuesta-card ion-card-title {
+    display: flex;
+  }
+  
+  .apuesta-card ion-card-title {
     font-size: 1.2em;
     color: #ffffff;
     margin-bottom: 10px;
-}
-
-.apuesta-card p {
+  }
+  
+  .apuesta-card p {
     margin: 5px 0;
     color: #ffffff;
     font-size: 0.9em;
-}
-
-ion-button {
+  }
+  
+  ion-button {
     margin-top: 15px;
     font-weight: bold;
     --background: #ffcc00;
     --color: #000;
-}
-
-.noApuestas-text {
+  }
+  
+  .noApuestas-text {
     font-size: 1.1em;
     color: #ffffff;
     text-align: center;
     margin-top: 20px;
-}
-
-ion-toolbar .contenedor {
+  }
+  
+  ion-toolbar .contenedor {
     display: flex;
     align-items: center;
   }
@@ -69,3 +82,4 @@ ion-toolbar .contenedor {
     height: auto;
     margin-right: 10px; /* Espacio entre el logo y el texto */
   }
+  

@@ -1,16 +1,33 @@
 ion-content {
-  --background: linear-gradient(to bottom, #236a23, #4edd3b) !important;
+  --background: linear-gradient(to bottom, #4edd3b, #236a23) !important;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  padding: 0; 
-  margin: 0; 
-  height: 100%; 
-  width: 100%; 
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: 116px;
+
+
 }
 
-.md list-md.hydrated{
-  background-color: transparent;
+
+ion-list {
+  background: transparent;
+  padding: 0;
+  padding-top: 65px;
+  margin: 0 auto;
+  width: 100%; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+}
+
+ion-item {
+  --background: transparent;
+  --min-height: auto;
+  border: none;
 }
 
 .match-card {
@@ -19,15 +36,16 @@ ion-content {
   border: 1px solid #000000;
   border-radius: 10px;
   margin-bottom: 20px;
-  background-color: #3fb630;
-  width: 100%; 
-  max-width: 400px; 
+  background-color: transparent;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  width: 325px; 
+  height: auto; 
 }
 
 .teams-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 20px 0;
 }
@@ -42,6 +60,7 @@ ion-content {
   width: 50px;
   height: 50px;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .vs-text {
@@ -64,10 +83,22 @@ ion-content {
 ion-toolbar .contenedor {
   display: flex;
   align-items: center;
+  
 }
 
 ion-toolbar .contenedor img {
-  width: 150px; /* Ajusta el tamaño según sea necesario */
+  width: 150px;
   height: auto;
-  margin-right: 10px; /* Espacio entre el logo y el texto */
+  margin-right: 10px;
 }
+
+ion-header {
+  position: fixed; /* Mantener el header fijo */
+  top: 0; /* Asegura que esté en la parte superior */
+  left: 0; /* Asegura que esté alineado a la izquierda */
+  right: 0; /* Asegura que esté alineado a la derecha */
+  z-index: 10; /* Asegúrate de que tenga un z-index alto para superponerse al contenido */
+}
+
+
+

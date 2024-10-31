@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -9,75 +10,82 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class Tab2Page {
-  showPassword = false;
+  showPassword: boolean = false;
   password: string = '';
+  confirmPassword: string = '';
   email: string = '';
-  tipoerror: any = '';
+  validLength: boolean = false;
+  validUppercase: boolean = false;
+  validSpecialChar: boolean = false;
 
   constructor(
     public auth: AuthenticationService,
     public router: Router,
     private toastController: ToastController
   ) {}
-
+  /**
+   * @function validatePassword
+   * @description Condiciones para contraseña:mayor o igual a 8 caracteres,al menos una mayuscula y un signo.
+   */
+  validatePassword() {
+    this.validLength = this.password.length >= 8;
+    this.validUppercase = /[A-Z]/.test(this.password);
+    this.validSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(this.password);
+  }
   /**
    * @function register
    * @description Realiza el registro del usuario con el correo y la contraseña ingresados.
    * Si es exitoso, muestra un mensaje y redirige a la página de inicio de sesión; en caso de error, muestra un mensaje de error.
    */
   async register() {
+    if (this.password !== this.confirmPassword) {
+      this.presentToast('Las contraseñas no coinciden.');
+      return;
+    }
+    if (!this.validLength || !this.validUppercase || !this.validSpecialChar) {
+      this.presentToast('La contraseña no cumple con los requisitos.');
+      return;
+    }
+
     this.auth
       .signUp(this.email, this.password)
-      .then((userCredential) => {
-        this.presentToast();
-
+      .then((userCredential: any) => {
+        this.presentToast('Registro exitoso');
         setTimeout(() => {
           this.router.navigate(['login']);
         }, 3000);
       })
       .catch((error: any) => {
         console.log(error.code);
-        this.tipoerror = error.code;
-        this.ErrorToast(this.tipoerror);
+        this.ErrorToast(error.code);
       });
   }
-
-  /**
-   * @function backToLogin
-   * @description Navega de regreso a la página de inicio de sesión.
-   */
-  backToLogin() {
-    this.router.navigate(['login']);
-  }
-
-  /**
+   /**
    * @function presentToast
    * @description Muestra un mensaje de confirmación al usuario tras un registro exitoso.
    */
-  async presentToast() {
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      header: 'Registro exitoso',
-      message: 'Bienvenido.',
+      message: message,
       duration: 4500,
-      position: 'top', 
+      position: 'top',
       buttons: [
         {
           icon: 'close',
-          role: 'cancel', 
+          role: 'cancel',
         },
       ],
     });
-    toast.present(); 
+    toast.present();
   }
-
-  /**
+    /**
    * @function ErrorToast
    * @description Muestra un mensaje de error en caso de fallo durante el registro, dependiendo del tipo de error.
    * @param {any} tipoerror - Código de error recibido durante el proceso de registro.
    */
   async ErrorToast(tipoerror: any) {
     let message = 'Registro fallido';
-
+  
     if (tipoerror === 'auth/invalid-email') {
       message = 'Correo electrónico inválido.';
     } else if (tipoerror === 'auth/email-already-in-use') {
@@ -87,20 +95,25 @@ export class Tab2Page {
     } else {
       message = 'Error en el registro, verifique los datos: ';
     }
-
     const toast = await this.toastController.create({
       header: 'Registro fallido',
       message: message,
       duration: 4500,
-      position: 'top', 
+      position: 'top',
       buttons: [
         {
           icon: 'close',
-          role: 'cancel', 
+          role: 'cancel',
         },
       ],
     });
-    toast.present(); 
+    toast.present();
+  }
+   /**
+   * @function backToLogin
+   * @description Navega de regreso a la página de inicio de sesión.
+   */ 
+  backToLogin() {
+    this.router.navigate(['login']);
   }
 }
-

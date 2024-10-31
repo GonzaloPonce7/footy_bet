@@ -1,7 +1,6 @@
-<ion-content>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
 
+  <ion-header [translucent]="true">
+    <ion-toolbar slot="fixed">
       <ion-buttons class="back" slot="start" size="large">
         <ion-button (click)="VolverAtras()">
           <ion-icon name="arrow-back-outline" size="large"></ion-icon>
@@ -11,32 +10,36 @@
       <div class="contenedor" slot="start">
         <p class="fuente">Bienvenido/a</p>
       </div>
-      
+
       <div class="contenedor" slot="end">
         <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
       </div>
     </ion-toolbar>
   </ion-header>
-
+  <ion-content>
   <div class="user-info">
     <h2>Usuario: {{ userEmail }}</h2>
   </div>
 
   <div *ngIf="!apuestas">
+    <ion-spinner></ion-spinner>
     <ion-text>
-      <h4>Cargando</h4>
+      <h4>Cargando...</h4>
     </ion-text>
   </div>
+  
 
   <div class="apuesta-list" *ngIf="apuestas">
     <ion-list *ngIf="apuestas && apuestas.length > 0; else noApuestas">
-      <ion-item *ngFor="let apuesta of apuestas" lines="none">
+      <ion-item *ngFor="let apuesta of apuestas" lines="none" class="item">
         <div class="apuesta-card">
           <ion-card>
             <ion-card-header>
               <ion-card-title>{{ apuesta.partido }}</ion-card-title>
-              <p>Fecha de apuesta: {{ apuesta.fechaApuesta }}</p>
-              <p>Fecha de partido: {{ apuesta.fechaPartido }}</p>
+              <p>Fecha de apuesta: {{ formatDate(apuesta.fechaApuesta) }}</p> 
+              <p>Hora de apuesta: {{ formatTime(apuesta.fechaApuesta) }}</p> 
+              <p>Fecha de partido: {{ formatDate(apuesta.fechaPartido) }}</p> 
+              <p>Hora de partido: {{ formatTime(apuesta.fechaPartido) }}</p> 
             </ion-card-header>
 
             <ion-card-content>
