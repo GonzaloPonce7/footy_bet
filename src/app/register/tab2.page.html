@@ -1,9 +1,7 @@
 <ion-content>
-  <ion-header [translucent]="true"> </ion-header>
+  <ion-header [translucent]="true"></ion-header>
 
   <ion-content [fullscreen]="true">
-    <!-- Contenido aquí -->
-
     <div class="contenedor">
       <img src="/assets/icon/Footybet.png" alt="Logo" class="footyLogo" />
       <p class="fuente">Registrarse</p>
@@ -17,24 +15,35 @@
         placeholder="Correo electrónico"
       />
 
+      <div class="password-container">
+        <input
+          [(ngModel)]="password"
+          (input)="validatePassword()"
+          class="input"
+          placeholder="Contraseña"
+          [type]="showPassword ? 'text' : 'password'"
+        />
+      </div>
+
+      <div class="validation-message">
+        <p *ngIf="!validLength">La contraseña necesita tener al menos 8 caracteres.</p>
+        <p *ngIf="!validUppercase">Necesita al menos una mayúscula.</p>
+        <p *ngIf="!validSpecialChar">Necesita al menos un signo especial.</p>
+      </div>
+
       <input
-        [(ngModel)]="password"
+        [(ngModel)]="confirmPassword"
         class="input"
-        placeholder="Contraseña"
-        [type]="showPassword ? 'text' : 'password'"
+        type="password"
+        placeholder="Confirmar contraseña"
       />
 
-      <!-- <ion-button shape="round" size="large" color="tertiary">Iniciar sesion</ion-button>
-
-
--->
-      <img class="register" src="assets/icon/crearcuenta.svg" alt="Logo" (click)="register()" />
+      <ion-button shape="round" size="large" color="tertiary" (click)="register()">Crear cuenta</ion-button>
     </div>
 
     <hr class="lineaseparadora" />
-    <br>
     <div class="contenedor">
-      <h4 class="fuente2 back" (click)="backToLogin()">Regresar al inicio</h4>
+      <ion-button shape="round" size="large" color="tertiary" (click)="backToLogin()">Regresar</ion-button>
     </div>
   </ion-content>
 </ion-content>

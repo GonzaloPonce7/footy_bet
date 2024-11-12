@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // Importa AngularFireAuthModule
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +23,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule, // Agrega el módulo de autenticación aquí
     HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

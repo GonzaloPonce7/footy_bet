@@ -1,82 +1,88 @@
-//MI CUENTA
+ion-content {
+  --background: linear-gradient(to bottom, #4edd3b, #236a23) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: 116px;
 
-.miCuenta-contenedor {
-    background: rgba(0, 0, 0, 0.5);
-    margin: 20px;
+
+}
+  
+  ion-list {
+    background: transparent;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%; /* Asegura que use el ancho completo */
+    display: flex; /* Cambiado de inline-flex a flex */
+    flex-direction: column;
+    align-items: center; /* Centra las tarjetas en la columna */
+  }
+  
+  ion-item {
+    --background: transparent;
+    --min-height: auto;
+    border: none;
+  }
+  
+  .apuesta-card {
+    align-items: center;
+    text-align: center;
+    border: 1px solid #110eb9;
     border-radius: 10px;
-    padding-bottom: 20px;
-}
+    margin-bottom: 20px;
+    background: rgba(63, 182, 48, 0.8); /* Color con opacidad */
+    box-shadow: 0 2px 8px rgba(11, 151, 86, 0.2);
+    transition: transform 0.2s; /* Añadir una transición para el hover */
+    
 
-.miCuenta-contenedor ion-toolbar, ion-item {
-    --background: none;
-}
-
-.miCuenta-contenedor ion-item {
-    padding-right: 15px;
-}
-
-//IMAGEN PERFIL
-
-.img-profile {
-        width: 150px;
-        height: 150px;
-        margin-top: 45px !important;
-        gap: 0px;
-        opacity: 0px;
-        margin-bottom: 0px !important;
-}
-
-.contenedor {
-    width: 100%;
-    text-align: center; /* Esto centra el contenido dentro del div */
-}
-
-.input  {
-    width: 298px;
-    height: 41px;
-    display: block !important;
-     margin-top: 20px;
-    background: white;
-    color: black;
-    border-radius: 10px;
-    }
-
-    h3 {
-        text-align: left !important;
-      }
-
-.imgsig{      margin-top: 20px;}
-
-
-.img-profile {
-    width: 150px;
-    height: 150px;
-    margin-top: 45px !important;
-    gap: 0px;
-    opacity: 0px;
-    margin-bottom: 0px !important;
-}
-
-  //BOTONES
-
-  .btn-guardar {
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    background: #3F236A;
-    font-size: 15px !important;
-    font-weight: 200 !important;
-    color: white;
-    text-transform: none;
-}
-
-.btn-cerrar {
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    background: #3F236A;
-    font-size: 15px !important;
-    font-weight: 200 !important;
-    color: white;
-    text-transform: none;
-}
+  }
+  
+  ion-card {
+    background-color: dimgrey;
+    display: flex;
+  }
+  
+  .apuesta-card ion-card-title {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .apuesta-card p {
+    margin: 5px 0;
+    color: #ffffff;
+    font-size: 0.9em;
+  }
+  
+  ion-button {
+    margin-top: 15px;
+    font-weight: bold;
+    --background: #ffcc00;
+    --color: #000;
+  }
+  
+  .noApuestas-text {
+    font-size: 1.1em;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  ion-toolbar .contenedor {
+    display: flex;
+    align-items: center;
+  }
+  
+  ion-toolbar .contenedor img {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el logo y el texto */
+  }
+  
+  .user-info{
+    padding: 10px;
+  }

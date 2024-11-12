@@ -1,36 +1,70 @@
-<div class="contenedor">
-  <img src="assets/perfil.png" class="img-profile" alt="Logo">
+
+  <ion-header [translucent]="true">
+    <ion-toolbar slot="fixed">
+      <ion-buttons class="back" slot="start" size="large">
+        <ion-button (click)="VolverAtras()">
+          <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <div class="contenedor" slot="start">
+        <p class="fuente">Bienvenido/a</p>
+      </div>
+
+      <div class="contenedor" slot="end">
+        <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  <div class="user-info">
+    <h2>Usuario: {{ userEmail }}</h2>
+  </div>
+
+  <div *ngIf="!apuestas">
+    <ion-spinner></ion-spinner>
+    <ion-text>
+      <h4>Cargando...</h4>
+    </ion-text>
+  </div>
   
-  
-  <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="formulario">
-    <div class="miCuenta-contenedor">
 
-      <ion-toolbar>
-        <ion-title class="ion-text-start">Datos Personales</ion-title>
-      </ion-toolbar>
+  <div class="apuesta-list" *ngIf="apuestas">
+    <ion-list *ngIf="apuestas && apuestas.length > 0; else noApuestas">
+      <ion-item *ngFor="let apuesta of apuestas" lines="none" class="item">
+        <div class="apuesta-card">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ apuesta.partido }}</ion-card-title>
+              <p>Fecha de apuesta: {{ formatDate(apuesta.fechaApuesta) }}</p> 
+              <p>Hora de apuesta: {{ formatTime(apuesta.fechaApuesta) }}</p> 
+              <p>Fecha de partido: {{ formatDate(apuesta.fechaPartido) }}</p> 
+              <p>Hora de partido: {{ formatTime(apuesta.fechaPartido) }}</p> 
+            </ion-card-header>
 
-      <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
+            <ion-card-content>
+              <p>Resultado apostado: {{ apuesta.resultadoApostado }}</p>
+              <p>Estado: {{ apuesta.estado }}</p>
+              <p>Multiplicador: {{ apuesta.multiplicador }}</p>
+              <p>Monto: {{ apuesta.monto | currency }}</p>
+
+              <ion-button
+                expand="full"
+                color="primary"
+                (click)="exportarAPdf(apuesta)"
+              >
+                Exportar a PDF
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
       </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Apellido</ion-label>
-        <ion-input type="text" placeholder="Apellido" formControlName="apellido"></ion-input>
-      </ion-item>
+    </ion-list>
 
-      <ion-item>
-        <ion-label position="stacked">Correo Electronico</ion-label>
-        <ion-input type="text" placeholder="Correo Electronico" formControlName="correo"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Telefono</ion-label>
-        <ion-input type="text" placeholder="Telefono" formControlName="telefono"></ion-input>
-      </ion-item>
-
-    </div>
-
-    <ion-button fill="clear" type="submit" class="btn-guardar">Guardar Cambios</ion-button>
-
-</form>
+    <ng-template #noApuestas>
+      <ion-text>
+        <h4>No hay apuestas disponibles.</h4>
+      </ion-text>
+    </ng-template>
+  </div>
+</ion-content>

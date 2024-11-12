@@ -1,61 +1,82 @@
+<ion-header translucent="true">
+  <ion-toolbar slot="fixed">
+    <ion-buttons class="back" slot="start" size="large">
+      <ion-button (click)="VolverAtras()">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <div class="contenedor" slot="start">
+      <p class="fuente">Bienvenido/a</p>
+    </div>
+
+    <div class="contenedor" slot="end">
+      <img src="assets/icon/FootybetL.png" alt="logo" class="logo">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-
-  
-
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <div class="contenedor">
-        <img src="assets/icon/Footybet.png" alt="Logo" class="footyLogo" />
-        <p class="fuente">Bienvenido/a</p>
-      </div>
-      <ion-buttons class="back" slot="start" size="large">
-        <ion-button (click)="VolverAtras()">
-          <ion-icon name="arrow-back-outline" size="large"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list *ngIf="partidosPremier.length > 0; else noData">
-    <ion-item *ngFor="let partido of partidosPremier">
-      <div class="match-card">
-        <h3>{{ partido.competition_name }}</h3>
-
-        <div class="teams-container">
-          <div class="team">
-            <img [src]="partido.local_shield" alt="Escudo Local" class="team-logo">
-            <span>{{ partido.local }}</span>
-          </div>
-          <span class="vs-text">VS</span>
-          <div class="team">
-            <img [src]="partido.visitor" alt="Escudo Visitante" class="team-logo">
-            <span>{{ partido.visitor }}</span>
-          </div>
-        </div>
-
-        <div class="match-info">
-          <p>Fecha: {{ partido.date }}</p>
-        </div>
-
-        <div class="match-result">
-          <!-- Si el partido ya se jugó, mostrar solo el resultado -->
-          <p *ngIf="esPartidoJugado(partido.date)">Resultado: {{ partido.result }}</p>
-
-          <!-- Si el partido aún no se ha jugado, mostrar botón de apuesta -->
-          <ion-button *ngIf="!esPartidoJugado(partido.date)" (click)="apostar(partido)">Apostar</ion-button>
-        </div>
-
-      </div>
-    </ion-item>
-  </ion-list>
-
-  <ng-template #noData>
+  <div *ngIf="!partidosPremier">
     <ion-text>
-      <h4>No hay partidos disponibles.</h4>
+      <h4>Cargando</h4>
     </ion-text>
-  </ng-template>
-  
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  </div>
+
+  <div class="match-list" *ngIf="partidosPremier">
+    <ion-list *ngIf="partidosPremier && partidosPremier.length > 0; else noData">
+      <ion-item *ngFor="let partido of partidosPremier" lines="none">
+        <div class="match-card">
+          <h3>{{ partido.competition_name }}</h3>
+
+          <div class="teams-container">
+            <div class="team">
+              <img
+                [src]="partido.local_shield"
+                alt="Escudo Local"
+                class="team-logo"
+              />
+              <span>{{ partido.local }}</span>
+            </div>
+            <span class="vs-text">VS</span>
+            <div class="team">
+              <img
+                [src]="partido.visitor_shield"
+                alt="Escudo Visitante"
+                class="team-logo"
+              />
+              <span>{{ partido.visitor }}</span>
+            </div>
+          </div>
+
+          <div class="match-info">
+            <p>Fecha: {{ partido.date }}</p>
+            <p>Hora: {{ partido.time }}</p>
+          </div>
+
+          <div class="match-result">
+            <p>Estado: {{ partido.status }}</p> 
+            <ion-button
+              *ngIf="partido.status === 'Pendiente'"
+              (click)="apostar(partido)"
+            >
+              Apostar
+            </ion-button>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #noData>
+      <ion-text>
+        <h4>No hay partidos disponibles.</h4>
+      </ion-text>
+    </ng-template>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button class="Bfix" (click)="irUser()">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
-  
-  
