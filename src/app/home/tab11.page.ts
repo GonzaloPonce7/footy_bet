@@ -36,7 +36,7 @@ export class Tab11Page implements OnInit {
   
       const fechaActual = new Date();
       const fechaLimite = new Date();
-      fechaLimite.setDate(fechaActual.getDate() + 12);
+      fechaLimite.setDate(fechaActual.getDate() + 15);
   
       this.partidosPremier = partidosDelDia.matches
         .filter((p: any) => this.enSiguientesCincoDias(p.utcDate, fechaActual, fechaLimite))

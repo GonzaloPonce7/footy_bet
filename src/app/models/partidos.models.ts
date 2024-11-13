@@ -3,10 +3,9 @@ export interface Partido {
     local: string;
     visitor: string;
     competition_name: string;
-    date: string; // Mantén esta propiedad
-    time?: string; // Añade esta propiedad como opcional
+    date: string;
+    time?: string; 
     local_shield: string;
     visitor_shield: string;
     status: string;
   }
-  

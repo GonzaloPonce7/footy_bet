@@ -22,8 +22,8 @@ export class Tab8Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.obtenerApuestasUsuarioActual();
     this.getCurrentUserEmail();
+    this.obtenerApuestasUsuarioActual();
   }
 
   /**
@@ -60,6 +60,8 @@ export class Tab8Page implements OnInit {
  */
   async obtenerApuestasUsuarioActual() {
     this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual();
+    console.log(this.apuestas);
+    
   }
 
   /**
