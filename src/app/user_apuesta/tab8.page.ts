@@ -11,7 +11,7 @@ import { jsPDF } from 'jspdf';
   templateUrl: './tab8.page.html',
   styleUrls: ['./tab8.page.scss'],
 })
-export class Tab8Page implements OnInit {
+export class Tab8Page {
   userEmail: string | null = null;
   apuestas: Apuestas[] | undefined;
 
@@ -21,7 +21,7 @@ export class Tab8Page implements OnInit {
     private apuestasService: ApuestasService
   ) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.obtenerApuestasUsuarioActual();
     this.getCurrentUserEmail();
   }
@@ -60,6 +60,7 @@ export class Tab8Page implements OnInit {
  */
   async obtenerApuestasUsuarioActual() {
     this.apuestas = await this.apuestasService.obtenerApuestasUsuarioActual();
+    console.log(this.apuestas);
   }
 
   /**
@@ -89,25 +90,45 @@ export class Tab8Page implements OnInit {
 
   /**
  * @function formatDate
- * @description Formatea una cadena de fecha en un formato legible (día, mes y año) utilizando la configuración regional de Argentina (es-AR). Convierte la cadena de fecha en un objeto `Date` y luego aplica el formato deseado.
+ * @description Formatea una cadena de fecha en un formato de hora legible (hora y minuto) utilizando la configuración regional de Argentina (es-AR). 
+ * Convierte la cadena de fecha en un objeto `Date` y luego aplica el formato deseado sin usar el formato de 12 horas. 
+ * En este caso la funcion intenta darle formato valido dos veces con new Date(dateString) y si date.getTime() isNaN, hace Date.Parse, 
+ * retornando un valor numérico válido.
  * @param {string} dateString - La cadena de fecha a formatear.
  * @returns {string} La fecha formateada en un formato legible.
  */
   formatDate(dateString: string): string {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    const date = new Date(dateString);
+    if (!dateString) return 'Fecha no disponible';
+    
+    let date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      date = new Date(Date.parse(dateString));
+    }
+    if (isNaN(date.getTime())) return 'Fecha inválida'; 
+
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
     return new Intl.DateTimeFormat('es-AR', options).format(date);
   }
 
   /**
  * @function formatTime
- * @description Formatea una cadena de fecha en un formato de hora legible (hora y minuto) utilizando la configuración regional de Argentina (es-AR). Convierte la cadena de fecha en un objeto `Date` y luego aplica el formato deseado sin usar el formato de 12 horas.
+ * @description Formatea una cadena de fecha en un formato de hora legible (hora y minuto) utilizando la configuración regional de Argentina (es-AR). 
+ * Convierte la cadena de fecha en un objeto `Date` y luego aplica el formato deseado sin usar el formato de 12 horas. 
+ * En este caso la funcion intenta darle formato valido dos veces con new Date(dateString) y si date.getTime() isNaN, hace Date.Parse, 
+ * retornando un valor numérico válido. 
  * @param {string} dateString - La cadena de fecha de la que se extraerá la hora.
  * @returns {string} La hora formateada en un formato legible.
  */
   formatTime(dateString: string): string {
+    if (!dateString) return 'Hora no disponible';
+    
+    let date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      date = new Date(Date.parse(dateString));
+    }
+    if (isNaN(date.getTime())) return 'Hora inválida';
+
     const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: false, timeZone: 'America/Argentina/Buenos_Aires' };
-    const date = new Date(dateString);
     return new Intl.DateTimeFormat('es-AR', options).format(date);
   }
 }
