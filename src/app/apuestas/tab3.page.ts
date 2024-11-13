@@ -89,7 +89,7 @@ export class Tab3Page implements OnInit {
             };
             try {
               await this.apuestasService.crearApuesta(nuevaApuesta);
-              this.router.navigate(['/user']);
+              this.router.navigate(['user']);
               return true;
             } catch (error) {
               console.error();
